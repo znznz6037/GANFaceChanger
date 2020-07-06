@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id = "button">
+    <input type = "file" id = "image" accept="image/*" onchange="setThumbnail(event);"/>
+    <div id = "image_container"> 
+        <h2> 첨부된 이미지 </h2>
+    </div>
+
+    <script>
+        function setThumbnail(event) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector("div#image_container").appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</div>
+
+<select name = "faceStyle">
+    <option value="">스타일 선택</option>
+    <option value="안경">안경</option>
+    <option value="안경삭제">안경삭제</option>
+    <option value="곱슬머리">곱슬머리</option>
+    <option value="백인">백인</option>
+</select>
+
+
+</body>
+</html>
