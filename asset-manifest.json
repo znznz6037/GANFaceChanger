@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/GANFaceChanger/static/css/main.5f361e03.chunk.css",
+    "main.js": "/GANFaceChanger/static/js/main.14e7549b.chunk.js",
+    "main.js.map": "/GANFaceChanger/static/js/main.14e7549b.chunk.js.map",
+    "runtime-main.js": "/GANFaceChanger/static/js/runtime-main.05c97524.js",
+    "runtime-main.js.map": "/GANFaceChanger/static/js/runtime-main.05c97524.js.map",
+    "static/js/2.3278881e.chunk.js": "/GANFaceChanger/static/js/2.3278881e.chunk.js",
+    "static/js/2.3278881e.chunk.js.map": "/GANFaceChanger/static/js/2.3278881e.chunk.js.map",
+    "index.html": "/GANFaceChanger/index.html",
+    "precache-manifest.3e21b96f4174be383bfb75911bcaa26f.js": "/GANFaceChanger/precache-manifest.3e21b96f4174be383bfb75911bcaa26f.js",
+    "service-worker.js": "/GANFaceChanger/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/GANFaceChanger/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.3278881e.chunk.js.LICENSE.txt": "/GANFaceChanger/static/js/2.3278881e.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/GANFaceChanger/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.05c97524.js",
+    "static/js/2.3278881e.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.14e7549b.chunk.js"
+  ]
+}
