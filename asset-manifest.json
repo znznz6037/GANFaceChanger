@@ -1,23 +1,22 @@
 {
   "files": {
     "main.css": "/GANFaceChanger/static/css/main.5f361e03.chunk.css",
-    "main.js": "/GANFaceChanger/static/js/main.14e7549b.chunk.js",
-    "main.js.map": "/GANFaceChanger/static/js/main.14e7549b.chunk.js.map",
+    "main.js": "/GANFaceChanger/static/js/main.a13e30a2.chunk.js",
+    "main.js.map": "/GANFaceChanger/static/js/main.a13e30a2.chunk.js.map",
     "runtime-main.js": "/GANFaceChanger/static/js/runtime-main.05c97524.js",
     "runtime-main.js.map": "/GANFaceChanger/static/js/runtime-main.05c97524.js.map",
-    "static/js/2.3278881e.chunk.js": "/GANFaceChanger/static/js/2.3278881e.chunk.js",
-    "static/js/2.3278881e.chunk.js.map": "/GANFaceChanger/static/js/2.3278881e.chunk.js.map",
+    "static/js/2.1c9800e9.chunk.js": "/GANFaceChanger/static/js/2.1c9800e9.chunk.js",
+    "static/js/2.1c9800e9.chunk.js.map": "/GANFaceChanger/static/js/2.1c9800e9.chunk.js.map",
     "index.html": "/GANFaceChanger/index.html",
-    "precache-manifest.8d2d31b7d4a990100da7389bcfea09e9.js": "/GANFaceChanger/precache-manifest.8d2d31b7d4a990100da7389bcfea09e9.js",
+    "precache-manifest.da859e7d7f3c348adbf42e78d8944f82.js": "/GANFaceChanger/precache-manifest.da859e7d7f3c348adbf42e78d8944f82.js",
     "service-worker.js": "/GANFaceChanger/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/GANFaceChanger/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.3278881e.chunk.js.LICENSE.txt": "/GANFaceChanger/static/js/2.3278881e.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/GANFaceChanger/static/media/logo.5d5d9eef.svg"
+    "static/js/2.1c9800e9.chunk.js.LICENSE.txt": "/GANFaceChanger/static/js/2.1c9800e9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.05c97524.js",
-    "static/js/2.3278881e.chunk.js",
+    "static/js/2.1c9800e9.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.14e7549b.chunk.js"
+    "static/js/main.a13e30a2.chunk.js"
   ]
 }
