@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>GAN을 활용한 페이스 체인지</title>
+      <link rel="icon" href="%PUBLIC_URL%/pnu_logo.png" />
   </head>
+
+  <style>
+      #border {
+          position: fixed;
+          width: 500px;
+          height: 800px;
+          left : 50%;
+          top : 15%;
+          margin-left: -250px;
+          background-color: pink;
+          overflow: hidden;
+      }
+      #border_title {
+          width : 500px;
+          height : 150px;
+          font-size: 25px;
+          text-align : center;
+      }
+      #label {
+          font-size : 24px;
+          line-height: 400px;
+
+      }
+      #file_upload {
+          width: 400px;
+          height: 400px;
+          padding: 15px;
+          margin: 0 auto;
+          background-color:lavender;
+          overflow:hidden;
+          border-style: dashed;
+      }
+      #title {
+          color : white;
+          line-height: 200px;
+      }
+      #image {
+          position: relative;
+          width: 430px;
+          height: 430px;
+          right:15px;
+          bottom:415px;
+          margin: 0 auto;
+          opacity: 0;
+          text-align: center;
+      }
+      #faceStyle {
+          width: 500px;
+          height: 50px;
+          font-size: 20px;
+      }
+      #faceStyle_border {
+          width: 500px;
+          height: 15px;
+      }
+      #a {
+          width: 500px;
+          height: 115px;
+          font-size: 80px;
+      }
+  </style>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id = "border">
+        <form action = "http://127.0.0.1:5000/upload" method = "POST" enctype =
+        "multipart/form-data">
+        <div id = "border_title"> 
+            <h1 id = "title"> 이미지 스타일 변경 </h1>
+        </div>
+        <div id = file_upload>
+            <label for="file" id = label>클릭해서 이미지를 업로드 해주세요</label>
+            <input type = "file" name = "file" id = "image" accept="image/*" 
+            onchange="setThumbnail(event);"/>
+        </div>
+        <div id = faceStyle_border></div>    
+            <select id = "faceStyle">
+                <option value="">스타일 선택</option>
+                <option value="안경">안경</option>
+                <option value="안경삭제">안경삭제</option>
+                <option value="곱슬머리">곱슬머리</option>
+                <option value="백인">백인</option>
+            </select>
+        <input type = "submit" value = "제출" id = "a"/>
+        </form>
+    </div>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
