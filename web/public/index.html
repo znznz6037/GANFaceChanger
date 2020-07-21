@@ -6,15 +6,14 @@
       <title>GAN을 활용한 페이스 체인지</title>
       <link rel="icon" href="%PUBLIC_URL%/pnu_logo.png" />
   </head>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <style>
       #border {
           position: fixed;
           width: 500px;
           height: 800px;
           left : 50%;
-          top : 15%;
-          margin-left: -250px;
+          margin-left:-250px;
           background-color: pink;
           overflow: hidden;
       }
@@ -66,30 +65,50 @@
           height: 115px;
           font-size: 80px;
       }
+      #loading{
+          position:relative;
+          text-align:center;
+          display:none;
+          top:30%;
+      }
+
   </style>
   <body>
     <div id = "border">
-        <form action = "http://127.0.0.1:5000/upload" method = "POST" enctype =
-        "multipart/form-data">
-        <div id = "border_title"> 
-            <h1 id = "title"> 이미지 스타일 변경 </h1>
+        <div class="loading" id = "loading">
+            <img src = "loading.gif"/>
+            <p>딥러닝 작업이 수행되고 있습니다. 조금만 기다려주세요.</p>
+            <p>무료 서버라서 3분정도 걸립니다..</p>
         </div>
-        <div id = file_upload>
-            <label for="file" id = label>클릭해서 이미지를 업로드 해주세요</label>
-            <input type = "file" name = "file" id = "image" accept="image/*" 
-            onchange="setThumbnail(event);"/>
+        <div id="notLoading">
+            <form id="upload" action = "http://101.101.219.135:5000/upload" method = "POST" enctype =
+            "multipart/form-data">
+            <div id = "border_title"> 
+                <h1 id = "title"> 이미지 스타일 변경 </h1>
+            </div>
+            <div id = file_upload>
+                <label for="file" id = label>클릭해서 이미지를 업로드 해주세요</label>
+                <input type = "file" name = "file" id = "image" accept="image/*" 
+                onchange="setThumbnail(event);"/>
+            </div>
+            <div id = faceStyle_border></div>    
+                <select id = "faceStyle">
+                    <option value="">스타일 선택</option>
+                    <option value="안경">안경</option>
+                    <option value="안경삭제">안경삭제</option>
+                    <option value="곱슬머리">곱슬머리</option>
+                    <option value="백인">백인</option>
+                </select>
+            <input type = "submit" value = "제출" id = "a"/>
+            </form>
         </div>
-        <div id = faceStyle_border></div>    
-            <select id = "faceStyle">
-                <option value="">스타일 선택</option>
-                <option value="안경">안경</option>
-                <option value="안경삭제">안경삭제</option>
-                <option value="곱슬머리">곱슬머리</option>
-                <option value="백인">백인</option>
-            </select>
-        <input type = "submit" value = "제출" id = "a"/>
-        </form>
     </div>
     <div id="root"></div>
+    <script type="text/javascript">
+        $('#upload').submit(function(){
+                $('#notLoading').hide()
+                $('#loading').show()
+            })
+      </script>
   </body>
 </html>
