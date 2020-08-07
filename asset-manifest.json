@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/GANFaceChanger/static/css/main.523f09c5.chunk.css",
-    "main.js": "/GANFaceChanger/static/js/main.6dc1dc91.chunk.js",
-    "main.js.map": "/GANFaceChanger/static/js/main.6dc1dc91.chunk.js.map",
-    "runtime-main.js": "/GANFaceChanger/static/js/runtime-main.c83fbc75.js",
-    "runtime-main.js.map": "/GANFaceChanger/static/js/runtime-main.c83fbc75.js.map",
-    "static/js/2.a66e1e9a.chunk.js": "/GANFaceChanger/static/js/2.a66e1e9a.chunk.js",
-    "static/js/2.a66e1e9a.chunk.js.map": "/GANFaceChanger/static/js/2.a66e1e9a.chunk.js.map",
+    "main.css": "/GANFaceChanger/static/css/main.5dc1077c.chunk.css",
+    "main.js": "/GANFaceChanger/static/js/main.eb64c534.chunk.js",
+    "main.js.map": "/GANFaceChanger/static/js/main.eb64c534.chunk.js.map",
+    "runtime-main.js": "/GANFaceChanger/static/js/runtime-main.83647f7c.js",
+    "runtime-main.js.map": "/GANFaceChanger/static/js/runtime-main.83647f7c.js.map",
+    "static/js/2.59f4be57.chunk.js": "/GANFaceChanger/static/js/2.59f4be57.chunk.js",
+    "static/js/2.59f4be57.chunk.js.map": "/GANFaceChanger/static/js/2.59f4be57.chunk.js.map",
     "index.html": "/GANFaceChanger/index.html",
-    "precache-manifest.32a24879ab0676de55753402bbc3eb3c.js": "/GANFaceChanger/precache-manifest.32a24879ab0676de55753402bbc3eb3c.js",
+    "precache-manifest.cd7dc635a37ce03adc24fb88ab4d0e40.js": "/GANFaceChanger/precache-manifest.cd7dc635a37ce03adc24fb88ab4d0e40.js",
     "service-worker.js": "/GANFaceChanger/service-worker.js",
-    "static/css/main.523f09c5.chunk.css.map": "/GANFaceChanger/static/css/main.523f09c5.chunk.css.map",
-    "static/js/2.a66e1e9a.chunk.js.LICENSE.txt": "/GANFaceChanger/static/js/2.a66e1e9a.chunk.js.LICENSE.txt"
+    "static/css/main.5dc1077c.chunk.css.map": "/GANFaceChanger/static/css/main.5dc1077c.chunk.css.map",
+    "static/js/2.59f4be57.chunk.js.LICENSE.txt": "/GANFaceChanger/static/js/2.59f4be57.chunk.js.LICENSE.txt",
+    "static/media/loading.gif": "/GANFaceChanger/static/media/loading.1dd9a790.gif"
   },
   "entrypoints": [
-    "static/js/runtime-main.c83fbc75.js",
-    "static/js/2.a66e1e9a.chunk.js",
-    "static/css/main.523f09c5.chunk.css",
-    "static/js/main.6dc1dc91.chunk.js"
+    "static/js/runtime-main.83647f7c.js",
+    "static/js/2.59f4be57.chunk.js",
+    "static/css/main.5dc1077c.chunk.css",
+    "static/js/main.eb64c534.chunk.js"
   ]
 }
