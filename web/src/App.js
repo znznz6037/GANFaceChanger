@@ -14,14 +14,14 @@ class App extends Component{
             </div>
             <div id="notLoading">
                 <p id="ptext">얼굴이 정중앙에 위치하게 218 * 178 크기로 업로드해주세요.</p>
-                <form id="upload" action="http://34.64.112.90:5000/upload" method="POST" enctype="multipart/form-data">
+                <form id="upload" action="http://34.64.112.90:5000/upload" method="POST" encType="multipart/form-data">
                   <div id="border_title">
                       <h1 id="title"> 얼굴 특징 바꾸기! </h1>
                   </div>
                   <div id = "file_upload">
-                      <label for="file" id="label">클릭해서 이미지를 업로드 해주세요.</label>
-                      <input type="file" name="file" id="image" accept="image/*" 
-                      onchange="setThumbnail(event);"/>
+                      <label htmlFor="file" id="label">클릭해서 이미지를 업로드 해주세요.</label>
+                      <input type="file" name="file" id="image" accept="image/*"/>
+                      <div id ="uploaded_img"></div>
                   </div>
                   <div id="faceStyle_border"></div>    
                       <select id="faceStyle">

@@ -15,5 +15,30 @@
                 $('#notLoading').hide()
                 $('#loading').show()
         })
+
+        $('#file_upload').change(function(e){
+            var reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = function(){
+                var thumbnail = new Image();
+                thumbnail.src = reader.result;
+                thumbnail.onload = function(){
+                    var canvas = document.createElement('canvas');
+                    var canvasContext = canvas.getContext("2d");
+                    canvas.width = 400;
+                    canvas.height = 400;
+                    canvasContext.drawImage(this, 0, 0, 400, 400);
+                    var dataURI = canvas.toDataURL("image/*");
+                    var imgTag = "<img id='thumbnail' onclick=changeImage() src='" + dataURI + "'/>";
+                    $('#label').css("display", "none");
+                    $('#image').css("display", "none");
+                    $('#uploaded_img').html(imgTag);                   
+                }
+            }
+        });
+
+        function changeImage(){
+            $('#image').click();
+        }
     </script>
 </html>
