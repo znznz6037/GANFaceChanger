@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "89660582d1432d457110cfaf993f0cbd",
+    "revision": "971916b73876dc088ff378ea1554816c",
     "url": "/GANFaceChanger/index.html"
   },
   {
-    "revision": "8964903c4f75d0ad6da9",
-    "url": "/GANFaceChanger/static/css/main.511f4c34.chunk.css"
+    "revision": "a2996bba5459b5c873ab",
+    "url": "/GANFaceChanger/static/css/main.5044a006.chunk.css"
   },
   {
     "revision": "10f22ebc4949ac6b296b",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/GANFaceChanger/static/js/2.59f4be57.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8964903c4f75d0ad6da9",
-    "url": "/GANFaceChanger/static/js/main.25237ef0.chunk.js"
+    "revision": "a2996bba5459b5c873ab",
+    "url": "/GANFaceChanger/static/js/main.84a00f49.chunk.js"
   },
   {
     "revision": "24430be94ac870db6ea2",
