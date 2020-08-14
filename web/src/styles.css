@@ -1,0 +1,151 @@
+
+.App {
+  text-align: center;
+  font-family: 'Jua';
+  /* Give app full page to work with */
+  height: 100vh;
+}
+
+#page-wrap {
+  text-align: center;
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.App-header {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  background-color: #85929E;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+#border {
+  padding-top: 10vh;
+  width: 30vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#label {
+  padding-top: 13vh;
+  text-align:center;
+  font-size : 2vmin;
+  position: absolute;
+}
+#file_upload {
+  position: relative;
+  height:30vh;
+  background-color:lavender;
+  overflow:hidden;
+  margin : 1vmin;
+  border-style: dashed;
+}
+
+#title {
+  color : white;
+  line-height: 100px;
+}
+#image {
+  height:30vh;
+  width:28vw;
+  opacity: 0;
+  text-align: center;
+}
+#thumbnail{
+  height:30vh;
+}
+#faceStyle {
+  width: 500px;
+  height: 50px;
+  font-size: 20px;
+  text-align-last:center;
+}
+#faceStyle_border {
+  width: 500px;
+  height: 15px;
+}
+#loading{
+  position:relative;
+  text-align:center;
+  display:none;
+  top:30%;
+}
+#ptext{
+  font-size:medium;
+}
+#submit{
+  background-color: skyblue;
+}

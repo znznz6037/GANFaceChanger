@@ -25,7 +25,7 @@
                 thumbnail.onload = function(){
                     var canvas = document.createElement('canvas');
                     var canvasContext = canvas.getContext("2d");
-                    canvas.width = 400;
+                    canvas.width = 380;
                     canvas.height = 400;
                     canvasContext.drawImage(this, 0, 0, 400, 400);
                     var dataURI = canvas.toDataURL("image/*");
