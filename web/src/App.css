@@ -21,12 +21,80 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
 }
+
+#border {
+  position: fixed;
+  width: 500px;
+  height: 830px;
+  left : 50%;
+  margin-left:-250px;
+  background-color: pink;
+  overflow: hidden;
+}
+#border_title {
+  width : 500px;
+  height : 150px;
+  font-size: 25px;
+  text-align : center;
+}
+#label {
+  font-size : 24px;
+  line-height: 400px;
+
+}
+#file_upload {
+  width: 400px;
+  height: 400px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color:lavender;
+  overflow:hidden;
+  border-style: dashed;
+}
+#title {
+  color : white;
+  line-height: 100px;
+}
+#image {
+  position: relative;
+  width: 430px;
+  height: 430px;
+  right:15px;
+  bottom:415px;
+  margin: 0 auto;
+  opacity: 0;
+  text-align: center;
+}
+#faceStyle {
+  width: 500px;
+  height: 50px;
+  font-size: 20px;
+  text-align-last:center;
+}
+#faceStyle_border {
+  width: 500px;
+  height: 15px;
+}
+#a {
+  width: 500px;
+  height: 115px;
+  font-size: 80px;
+}
+#loading{
+  position:relative;
+  text-align:center;
+  display:none;
+  top:30%;
+}
+#ptext{
+  font-size:medium;
+}
+
 
 @keyframes App-logo-spin {
   from {

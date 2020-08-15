@@ -1,95 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>GAN을 활용한 페이스 체인지</title>
-      <link rel="icon" href="%PUBLIC_URL%/pnu_logo.png" />
-  </head>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GAN을 활용한 페이스 체인지</title>
+        <link rel="icon" href="%PUBLIC_URL%/pnu_logo.png" />
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script type="text/javascript">
+        $('#upload').submit(function(){
+                $('#notLoading').hide()
+                $('#loading').show()
+        })
 
-  <style>
-      #border {
-          position: fixed;
-          width: 500px;
-          height: 800px;
-          left : 50%;
-          top : 15%;
-          margin-left: -250px;
-          background-color: pink;
-          overflow: hidden;
-      }
-      #border_title {
-          width : 500px;
-          height : 150px;
-          font-size: 25px;
-          text-align : center;
-      }
-      #label {
-          font-size : 24px;
-          line-height: 400px;
+        $('#file_upload').change(function(e){
+            var reader = new FileReader();
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = function(){
+                var thumbnail = new Image();
+                thumbnail.src = reader.result;
+                thumbnail.onload = function(){
+                    var canvas = document.createElement('canvas');
+                    var canvasContext = canvas.getContext("2d");
+                    canvas.width = 380;
+                    canvas.height = 400;
+                    canvasContext.drawImage(this, 0, 0, 400, 400);
+                    var dataURI = canvas.toDataURL("image/*");
+                    var imgTag = "<img id='thumbnail' onclick=changeImage() src='" + dataURI + "'/>";
+                    $('#label').css("display", "none");
+                    $('#image').css("display", "none");
+                    $('#uploaded_img').html(imgTag);                   
+                }
+            }
+        });
 
-      }
-      #file_upload {
-          width: 400px;
-          height: 400px;
-          padding: 15px;
-          margin: 0 auto;
-          background-color:lavender;
-          overflow:hidden;
-          border-style: dashed;
-      }
-      #title {
-          color : white;
-          line-height: 200px;
-      }
-      #image {
-          position: relative;
-          width: 430px;
-          height: 430px;
-          right:15px;
-          bottom:415px;
-          margin: 0 auto;
-          opacity: 0;
-          text-align: center;
-      }
-      #faceStyle {
-          width: 500px;
-          height: 50px;
-          font-size: 20px;
-      }
-      #faceStyle_border {
-          width: 500px;
-          height: 15px;
-      }
-      #a {
-          width: 500px;
-          height: 115px;
-          font-size: 80px;
-      }
-  </style>
-  <body>
-    <div id = "border">
-        <form action = "http://127.0.0.1:5000/upload" method = "POST" enctype =
-        "multipart/form-data">
-        <div id = "border_title"> 
-            <h1 id = "title"> 이미지 스타일 변경 </h1>
-        </div>
-        <div id = file_upload>
-            <label for="file" id = label>클릭해서 이미지를 업로드 해주세요</label>
-            <input type = "file" name = "file" id = "image" accept="image/*" 
-            onchange="setThumbnail(event);"/>
-        </div>
-        <div id = faceStyle_border></div>    
-            <select id = "faceStyle">
-                <option value="">스타일 선택</option>
-                <option value="안경">안경</option>
-                <option value="안경삭제">안경삭제</option>
-                <option value="곱슬머리">곱슬머리</option>
-                <option value="백인">백인</option>
-            </select>
-        <input type = "submit" value = "제출" id = "a"/>
-        </form>
-    </div>
-    <div id="root"></div>
-  </body>
+        function changeImage(){
+            $('#image').click();
+        }
+    </script>
 </html>
