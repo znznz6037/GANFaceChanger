@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/GANFaceChanger/static/css/main.47eb563b.chunk.css",
-    "main.js": "/GANFaceChanger/static/js/main.855c7d3b.chunk.js",
-    "main.js.map": "/GANFaceChanger/static/js/main.855c7d3b.chunk.js.map",
+    "main.js": "/GANFaceChanger/static/js/main.af7f9233.chunk.js",
+    "main.js.map": "/GANFaceChanger/static/js/main.af7f9233.chunk.js.map",
     "runtime-main.js": "/GANFaceChanger/static/js/runtime-main.83647f7c.js",
     "runtime-main.js.map": "/GANFaceChanger/static/js/runtime-main.83647f7c.js.map",
     "static/css/2.11829350.chunk.css": "/GANFaceChanger/static/css/2.11829350.chunk.css",
     "static/js/2.a8eb7b73.chunk.js": "/GANFaceChanger/static/js/2.a8eb7b73.chunk.js",
     "static/js/2.a8eb7b73.chunk.js.map": "/GANFaceChanger/static/js/2.a8eb7b73.chunk.js.map",
     "index.html": "/GANFaceChanger/index.html",
-    "precache-manifest.1a3c76069e7fd20fe3b732a07e5d6f9d.js": "/GANFaceChanger/precache-manifest.1a3c76069e7fd20fe3b732a07e5d6f9d.js",
+    "precache-manifest.562a869f65c80aeabd5dd7ac9bbc769c.js": "/GANFaceChanger/precache-manifest.562a869f65c80aeabd5dd7ac9bbc769c.js",
     "service-worker.js": "/GANFaceChanger/service-worker.js",
     "static/css/2.11829350.chunk.css.map": "/GANFaceChanger/static/css/2.11829350.chunk.css.map",
     "static/css/main.47eb563b.chunk.css.map": "/GANFaceChanger/static/css/main.47eb563b.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.11829350.chunk.css",
     "static/js/2.a8eb7b73.chunk.js",
     "static/css/main.47eb563b.chunk.css",
-    "static/js/main.855c7d3b.chunk.js"
+    "static/js/main.af7f9233.chunk.js"
   ]
 }
