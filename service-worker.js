@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/GANFaceChanger/precache-manifest.760411440a634b62595a493651a5d7fd.js"
+  "/GANFaceChanger/precache-manifest.1a3c76069e7fd20fe3b732a07e5d6f9d.js"
 );
 
 self.addEventListener('message', (event) => {
