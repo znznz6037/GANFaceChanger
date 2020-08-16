@@ -4,6 +4,7 @@ import { push as Menu } from 'react-burger-menu'
 import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import Portrait from './Portrait'
 import FaceChange from './FaceChange'
+import faceResult from './FaceResult'
 
 class Slide extends React.Component {
   showSettings (event) {
@@ -35,13 +36,13 @@ class Slide extends React.Component {
   
   render () {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Menu isOpen={this.state.menuOpen}
         onStateChange={(state) => this.handleStateChange(state)}
         disableAutoFocus>
             <h1>메뉴</h1>
             <br></br>
-            <Link onClick={() => this.closeMenu()} to="/GANFaceChanger">
+            <Link onClick={() => this.closeMenu()} to="/">
                 페이스 체인지
             </Link>
             <Link onClick={() => this.closeMenu()} to="/portrait">
@@ -56,8 +57,9 @@ class Slide extends React.Component {
             </a>
         </Menu>
             <Switch>
-                <Route exact path="/GANFaceChanger" component={FaceChange}/>
+                <Route exact path="/" component={FaceChange}/>
                 <Route path="/portrait" component={Portrait}/>
+                <Route path="/faceResult" component={faceResult}/>
             </Switch>
         </Router>
     );
