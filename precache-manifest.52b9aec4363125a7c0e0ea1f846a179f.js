@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a0e9cb4dfa2f8b9bb09bfd851624837a",
+    "revision": "50bfe5ee3ef3428aec7a2e3852f40928",
     "url": "/GANFaceChanger/index.html"
   },
   {
