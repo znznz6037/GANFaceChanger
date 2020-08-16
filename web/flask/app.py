@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, send_file
 from flask_restful import Api, Resource
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+from OpenSSL import SSL
 from werkzeug.utils import secure_filename
 from PIL import Image
 import logging, json, requests,datetime, time, base64
 import os, threading, sys
 import subprocess
 
-port = 5000
+port = 5000 
 log = logging.basicConfig(filename='testsvr.log', level=logging.INFO)
 app = Flask(__name__)
-CORS(app)
+CORS(app, support_credentials=True)
 api = Api(app)
 UPLOAD_DIR="./data/celeba/images"
 RESULT_DIR="./static/image/results"
@@ -26,6 +27,7 @@ def Home():
     return render_template('home.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def upload():
      if request.method == 'POST':
         if os.path.isfile(image):
@@ -64,4 +66,4 @@ def download():
 
 if __name__=='__main__':
     logging.info('start server')
-    app.run('0.0.0.0', port=port, debug=True)
+    app.run('0.0.0.0', port=port, debug=True, ssl_context=('/etc/letsencrypt/live/psbgrad.duckdns.org/fullchain.pem', '/etc/letsencrypt/live/psbgrad.duckdns.org/privkey.pem'))

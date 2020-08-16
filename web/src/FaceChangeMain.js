@@ -24,7 +24,7 @@ class FaceChangeMain extends Component{
       let formData = new FormData(e.target)
       $.ajax({
           type:'POST',
-          url: 'http://34.64.112.90:5000/upload',
+          url: 'https://psbgrad.duckdns.org:5000/upload',
           data:formData,
           cache:false,
           contentType: false,
@@ -69,7 +69,7 @@ class FaceChangeMain extends Component{
                   
                 </div>
                 <div id="notLoading">
-                <form id="upload" onSubmit={this.uploadImage.bind(this)} action="http://34.64.112.90:5000/upload" method="POST" encType="multipart/form-data">
+                <form id="upload" onSubmit={this.uploadImage.bind(this)} action="https://psbgrad.duckdns.org:5000/upload" method="POST" encType="multipart/form-data">
                       <div id="border_title">
                           <h1 id="title">페이스 체인지</h1>
                       </div>
