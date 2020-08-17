@@ -14,46 +14,42 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  background-color: #85929E;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-#border {
+#Container{
+  top:0;
+  right:0;
   position: fixed;
-  width: 500px;
-  height: 830px;
-  left : 50%;
-  margin-left:-250px;
-  background-color: pink;
+  z-index:100;
+}
+
+#border {
+  width: 50vw;
+  height: 100vh;
   overflow: hidden;
 }
-#border_title {
-  width : 500px;
-  height : 150px;
-  font-size: 25px;
-  text-align : center;
-}
-#label {
-  font-size : 24px;
-  line-height: 400px;
 
+
+#label {
+  text-align:center;
+  font-size : 24px;
 }
 #file_upload {
-  width: 400px;
-  height: 400px;
-  padding: 15px;
-  margin: 0 auto;
+  height:30vh;
   background-color:lavender;
   overflow:hidden;
+  margin : 1vmin;
   border-style: dashed;
 }
 #title {
@@ -61,14 +57,12 @@
   line-height: 100px;
 }
 #image {
-  position: relative;
-  width: 430px;
-  height: 430px;
-  right:15px;
-  bottom:415px;
-  margin: 0 auto;
+  height:30vh;
   opacity: 0;
   text-align: center;
+}
+#thumbnail{
+  height:30vh;
 }
 #faceStyle {
   width: 500px;
@@ -79,11 +73,6 @@
 #faceStyle_border {
   width: 500px;
   height: 15px;
-}
-#a {
-  width: 500px;
-  height: 115px;
-  font-size: 80px;
 }
 #loading{
   position:relative;

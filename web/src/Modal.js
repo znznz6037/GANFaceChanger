@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const InfoModal = (props) => {
   const {
@@ -7,12 +7,11 @@ const InfoModal = (props) => {
   } = props;
 
   const [modal, setModal] = useState(false);
-  const focusAfterClose = false;
   const toggle = () => setModal(!modal);
 
   return (
     <div>
-      <a onClick={toggle}>소개</a>
+      <a id="modal" onClick={toggle}>소개</a>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>
             부산대학교 2020 전기 졸업과제 - GAN을 활용한 페이스 체인지
