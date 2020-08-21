@@ -9,19 +9,24 @@ class FaceChangeMain extends Component{
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
+      innerText: '스타일 선택',
       image: null,
       redirect:false
     };
 
-    this.uploadImage = this.uploadImage.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.uploadImage = this.uploadImage.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   uploadImage = (e) => {
       e && e.preventDefault();
       let formData = new FormData(e.target)
+      formData.append('style', this.state.innerText)
+      console.log(formData)
+
       $.ajax({
           type:'POST',
           url: 'https://psbgrad.duckdns.org:5000/upload',
@@ -31,7 +36,7 @@ class FaceChangeMain extends Component{
           processData: false,
           success:function(data){
               console.log("success");
-              console.log(data['img']);
+              console.log(data);
               this.setState({redirect:true})
               this.setState({image:data['img']})
               this.props.history.push('/faceResult', {data})
@@ -47,6 +52,12 @@ class FaceChangeMain extends Component{
     this.setState(prevState => ({
       dropdownOpen: !prevState.dropdownOpen
     }));
+  }
+
+  handleChange = event => {
+    this.setState({
+      innerText: event.target.name
+    })
   }
 
   render() {
@@ -69,7 +80,7 @@ class FaceChangeMain extends Component{
                   
                 </div>
                 <div id="notLoading">
-                <form id="upload" onSubmit={this.uploadImage.bind(this)} action="https://psbgrad.duckdns.org:5000/upload" method="POST" encType="multipart/form-data">
+                <form id="upload" name="style" onSubmit={this.uploadImage.bind(this)} value={this.state.innerText} action="https://psbgrad.duckdns.org:5000/upload" method="POST" encType="multipart/form-data">
                       <div id="border_title">
                           <h1 id="title">페이스 체인지</h1>
                       </div>
@@ -79,17 +90,18 @@ class FaceChangeMain extends Component{
                           <div id ="uploaded_img"></div>
                       </div>              
                           <Dropdown id="faceStyle" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                            <DropdownToggle caret>
-                              스타일 선택
+                            <DropdownToggle color="warning" caret className="dropdown-toggle">
+                              {this.state.innerText}
                             </DropdownToggle>
                             <DropdownMenu>
-                              <DropdownItem>금발</DropdownItem>
-                              <DropdownItem>흑발</DropdownItem>
-                              <DropdownItem>안경</DropdownItem>
-                              <DropdownItem>화장</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="하얀 피부">하얀 피부</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="염소 수염">염소 수염</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="안경">안경</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="미소">미소</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="화장">화장</DropdownItem>
                             </DropdownMenu>
                           </Dropdown>
-                      <Button id="submit" outline color="secondary" type="submit" size="lg">실행</Button> 
+                      <Button color="secondary" id="submit" type="submit" size="lg">실행</Button>{' '}
                     </form>
                 </div>
             </div>

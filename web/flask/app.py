@@ -32,6 +32,8 @@ def upload():
      if request.method == 'POST':
         if os.path.isfile(image):
            os.remove(image)
+        style = request.form['style']
+        print(style)
         f = request.files['file']
         fname = secure_filename(f.filename)
         fname.encode('utf-8')
@@ -42,9 +44,18 @@ def upload():
         #subprocess.call(["autocrop", "-i", UPLOAD_DIR, "-o", UPLOAD_DIR + '/images', "-w", "256", "-H" ,"256"])
         f.save(path)
         print(path)
-        subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
-        #subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "180000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
-        time.sleep(2)
+        if style == '안경':
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "180000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        elif style == '하얀 피부':
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "199000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Pale_Skin", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        elif style == '염소 수염': 
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "198000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Goatee", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        elif style == '화장': 
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "197000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Wearing_Lipstick", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        
+        else:
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        #time.sleep(2)
         #result = os.path.join(app.config['RESULT_DIR'], secure_filename('1-images.jpg'))
         data = {}
         with open(image, mode='rb') as file:

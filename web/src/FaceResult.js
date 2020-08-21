@@ -26,7 +26,7 @@ class FaceResult extends Component{
             <img src={'data:image/jpg;base64,' + this.props.location.state.data["img"]}/>
             <div>
               <form action="https://psbgrad.duckdns.org:5000/download" method="POST" encType="multipart/form-data">
-                <Button id="submit" outline color="secondary" type="submit" size="lg">이미지 다운로드하기</Button>
+                <Button id="submit" color="warning" type="submit" size="lg">이미지 다운로드하기</Button>
               </form>
             </div>
           </div>
