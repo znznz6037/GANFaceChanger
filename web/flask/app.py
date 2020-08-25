@@ -13,14 +13,19 @@ log = logging.basicConfig(filename='testsvr.log', level=logging.INFO)
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 api = Api(app)
-UPLOAD_DIR="./data/celeba/images"
+FUPLOAD_DIR="./data/celeba/images"
+AUPLOAD_DIR="./imgs"
 RESULT_DIR="./static/image/results"
-app.config['UPLOAD_DIR'] = UPLOAD_DIR
+ANIME_RESULT_DIR="./UGATIT-master/result/image.jpg"
+app.config['FUPLOAD_DIR'] = FUPLOAD_DIR
+app.config['AUPLOAD_DIR'] = AUPLOAD_DIR
 app.config['RESULT_DIR'] = RESULT_DIR
+app.config['ANIME_RESULT_DIR'] = ANIME_RESULT_DIR
 app.config['JSON_AS_ASCII'] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 image = 'static/image/results/1-images.jpg'
+animeFname = ''
 
 @app.route('/')
 def Home():
@@ -32,16 +37,13 @@ def upload():
      if request.method == 'POST':
         if os.path.isfile(image):
            os.remove(image)
+        os.chdir('./stargan')
         style = request.form['style']
         print(style)
         f = request.files['file']
         fname = secure_filename(f.filename)
         fname.encode('utf-8')
-        path = os.path.join(app.config['UPLOAD_DIR'], fname)
-        #image = Image.open(UPLOAD_DIR + fname)
-        #resize_image = image.resize((178, 218))
-        #resize_image.save(fname)
-        #subprocess.call(["autocrop", "-i", UPLOAD_DIR, "-o", UPLOAD_DIR + '/images', "-w", "256", "-H" ,"256"])
+        path = os.path.join(app.config['FUPLOAD_DIR'], fname)
         f.save(path)
         print(path)
         if style == '안경':
@@ -52,15 +54,38 @@ def upload():
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "198000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Goatee", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
         elif style == '화장': 
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "197000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Wearing_Lipstick", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+        elif style == '미소': 
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "196000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Smiling", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
         
         else:
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
-        #time.sleep(2)
-        #result = os.path.join(app.config['RESULT_DIR'], secure_filename('1-images.jpg'))
         data = {}
         with open(image, mode='rb') as file:
            img = file.read()
         data['img'] = base64.b64encode(img).decode('utf8')
+        os.chdir('../')
+        return jsonify(data)
+
+@app.route('/uploadAnime', methods=['GET', 'POST'])
+def anime():
+    os.chdir('UGATIT-master')
+    if request.method == 'POST':
+        uploadImg = 'imgs/image.jpg'
+        animeImg = 'result/image.jpg'
+        if os.path.isfile(uploadImg):
+            os.remove(uploadImg)
+        f = request.files['file']
+        animeFname = secure_filename(f.filename)
+        animeFname.encode('utf-8')
+        path = os.path.join(app.config['AUPLOAD_DIR'], 'image.jpg')
+        f.save(path)
+        print(path)
+        subprocess.call(['python3', 'test.py'])
+        data = {}
+        with open(animeImg, mode='rb') as file:
+           img = file.read()
+        data['img'] = base64.b64encode(img).decode('utf8')
+        os.chdir('../')
         return jsonify(data)
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -71,9 +96,13 @@ def post():
     data['img'] = base64.b64encode(img).decode('utf8')
     return jsonify(data)
 
-@app.route('/download', methods=['GET', 'POST'])
+@app.route('/faceDownload', methods=['GET', 'POST'])
 def download():
     return send_file(image, as_attachment=True)
+
+@app.route('/animeDownload', methods=['GET', 'POST'])
+def animeDownload():
+    return send_file(ANIME_RESULT_DIR, '1.jpg', as_attachment=True)
 
 if __name__=='__main__':
     logging.info('start server')
