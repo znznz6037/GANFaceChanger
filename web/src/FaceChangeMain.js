@@ -10,6 +10,7 @@ class FaceChangeMain extends Component{
     super(props);
 
     this.state = {
+      isLoaded: false,
       dropdownOpen: false,
       innerText: '스타일 선택',
       image: null,
@@ -21,31 +22,67 @@ class FaceChangeMain extends Component{
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentDidMount(){
+    $('#upload').submit(function(){
+      if(this.isLoaded){
+        $('#notLoading').hide()
+        $('#loading').show()
+      }
+    })
+
+    $('#file_upload').change(function(e){
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = function(){
+          var thumbnail = new Image();
+          thumbnail.src = reader.result;
+          thumbnail.onload = function(){
+              var canvas = document.createElement('canvas');
+              var canvasContext = canvas.getContext("2d");
+              canvas.width = 380;
+              canvas.height = 400;
+              canvasContext.drawImage(this, 0, 0, 400, 400);
+              var dataURI = canvas.toDataURL("image/*");
+              var imgTag = "<img id='thumbnail' onclick=$('#image').click() src='" + dataURI + "'/>";
+              $('#label').css("display", "none");
+              $('#image').css("display", "none");
+              $('#uploaded_img').html(imgTag);                   
+          }
+      }
+    });
+  }
+
   uploadImage = (e) => {
       e && e.preventDefault();
-      let formData = new FormData(e.target)
-      formData.append('style', this.state.innerText)
-      console.log(formData)
+      if(document.getElementById("image").files.length == 0 ){
+        alert("이미지를 업로드 해주세요!");
+      }
+      else{
+        this.setState({isLoaded:true})
+        let formData = new FormData(e.target)
+        formData.append('style', this.state.innerText)
+        console.log(formData)
 
-      $.ajax({
-          type:'POST',
-          url: 'https://psbgrad.duckdns.org:5000/upload',
-          data:formData,
-          cache:false,
-          contentType: false,
-          processData: false,
-          success:function(data){
-              console.log("success");
-              console.log(data);
-              this.setState({redirect:true})
-              this.setState({image:data['img']})
-              this.props.history.push('/faceResult', {data})
-          }.bind(this),
-          error: function(data){
-              console.log("error");
-              console.log(data);
-          }
-      });
+        $.ajax({
+            type:'POST',
+            url: 'https://psbgrad.duckdns.org:5000/upload',
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+                this.setState({redirect:true})
+                this.setState({image:data['img']})
+                this.props.history.push('/faceResult', {data})
+            }.bind(this),
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+      }
   }
 
   toggle() {
@@ -90,7 +127,7 @@ class FaceChangeMain extends Component{
                           <div id ="uploaded_img"></div>
                       </div>              
                           <Dropdown id="faceStyle" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                            <DropdownToggle color="warning" caret className="dropdown-toggle">
+                            <DropdownToggle color="secondary" caret className="dropdown-toggle">
                               {this.state.innerText}
                             </DropdownToggle>
                             <DropdownMenu>
@@ -101,7 +138,7 @@ class FaceChangeMain extends Component{
                               <DropdownItem onClick={this.handleChange} name="화장">화장</DropdownItem>
                             </DropdownMenu>
                           </Dropdown>
-                      <Button color="secondary" id="submit" type="submit" size="lg">실행</Button>{' '}
+                      <Button color="warning" id="submit" type="submit" size="lg">실행</Button>{' '}
                     </form>
                 </div>
             </div>

@@ -1,21 +1,51 @@
 import React, { Component } from 'react';
 import "./styles.css";
 import './index.css';
-import { Spinner, Button } from 'reactstrap'
+import { Spinner, Button, Alert } from 'reactstrap'
 import { BrowserRouter as Redirect, withRouter} from 'react-router-dom'
 import $ from 'jquery'
 
 class Selfie2AnimeMain extends Component{
   constructor(props) {
     super(props);
-
     this.state = {
+      isLoaded: false,
       image: null,
       redirect:false
     };
 
     this.toggle = this.toggle.bind(this);
     this.uploadImage = this.uploadImage.bind(this)
+  }
+
+  componentDidMount(){
+    $('#upload').submit(function(){
+      if(this.isLoaded){
+        $('#notLoading').hide()
+        $('#loading').show()
+      }
+    })
+
+    $('#file_upload').change(function(e){
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = function(){
+          var thumbnail = new Image();
+          thumbnail.src = reader.result;
+          thumbnail.onload = function(){
+              var canvas = document.createElement('canvas');
+              var canvasContext = canvas.getContext("2d");
+              canvas.width = 380;
+              canvas.height = 400;
+              canvasContext.drawImage(this, 0, 0, 400, 400);
+              var dataURI = canvas.toDataURL("image/*");
+              var imgTag = "<img id='thumbnail' onclick=$('#image').click() src='" + dataURI + "'/>";
+              $('#label').css("display", "none");
+              $('#image').css("display", "none");
+              $('#uploaded_img').html(imgTag);                   
+          }
+      }
+    });
   }
 
   toggle() {
@@ -26,28 +56,35 @@ class Selfie2AnimeMain extends Component{
 
   uploadImage = (e) => {
     e && e.preventDefault();
-    let formData = new FormData(e.target)
-    console.log(formData)
+    if(document.getElementById("image").files.length == 0 ){
+      alert("이미지를 업로드 해주세요!");
+    }
+    else{
+      this.setState({isLoaded:true})
+      let formData = new FormData(e.target)
+    
+      console.log(formData)
 
-    $.ajax({
-        type:'POST',
-        url: 'https://psbgrad.duckdns.org:5000/uploadAnime',
-        data:formData,
-        cache:false,
-        contentType: false,
-        processData: false,
-        success:function(data){
-            console.log("success");
-            console.log(data);
-            this.setState({redirect:true})
-            this.setState({image:data['img']})
-            this.props.history.push('/animeResult', {data})
-        }.bind(this),
-        error: function(data){
-            console.log("error");
-            console.log(data);
-        }
-    });
+      $.ajax({
+          type:'POST',
+          url: 'https://psbgrad.duckdns.org:5000/uploadAnime',
+          data:formData,
+          cache:false,
+          contentType: false,
+          processData: false,
+          success:function(data){
+              console.log("success");
+              console.log(data);
+              this.setState({redirect:true})
+              this.setState({image:data['img']})
+              this.props.history.push('/animeResult', {data})
+          }.bind(this),
+          error: function(data){
+              console.log("error");
+              console.log(data);
+          }
+      });
+    }
 }
 
   render() {
@@ -73,14 +110,12 @@ class Selfie2AnimeMain extends Component{
                       <h1 id="title">Selfie2Anime</h1>
                   </div>
                   <div id = "file_upload">
-                       <label htmlFor="file" id="label">클릭해서 이미지를 업로드 해주세요.</label>
+                      <label htmlFor="file" id="label">클릭해서 이미지를 업로드 해주세요.</label>
                       <input type="file" name="file" id="image" accept="image/*"/>
                       <div id ="uploaded_img"></div>
                   </div>
-                  <Button color="secondary" id="submit" type="submit" size="lg">실행</Button> 
+                  <Button color="warning" id="submit" type="submit" size="lg">실행</Button> 
                 </form>
-                <br></br>
-                <p id="ptext">개발중입니다....</p>
             </div>
         </div>
         </header>
