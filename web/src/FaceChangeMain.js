@@ -4,13 +4,16 @@ import './index.css';
 import { Spinner, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import { BrowserRouter as Redirect, withRouter} from 'react-router-dom'
 import $ from 'jquery'
+import swal from 'sweetalert'
+
+var isLoaded=false
 
 class FaceChangeMain extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoaded: false,
+      //isLoaded: false,
       dropdownOpen: false,
       innerText: '스타일 선택',
       image: null,
@@ -24,15 +27,16 @@ class FaceChangeMain extends Component{
 
   componentDidMount(){
     $('#upload').submit(function(){
-      if(this.isLoaded){
-        $('#notLoading').hide()
-        $('#loading').show()
-      }
-    })
+        if(isLoaded){
+          $('#notLoading').hide()
+          $('#loading').show()
+        }
+      })
 
     $('#file_upload').change(function(e){
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
+      if(document.getElementById("image").files.length != 0 ) isLoaded=true
       reader.onload = function(){
           var thumbnail = new Image();
           thumbnail.src = reader.result;
@@ -55,10 +59,9 @@ class FaceChangeMain extends Component{
   uploadImage = (e) => {
       e && e.preventDefault();
       if(document.getElementById("image").files.length == 0 ){
-        alert("이미지를 업로드 해주세요!");
+        swal("Error", "이미지를 업로드해주세요!", "error")
       }
       else{
-        this.setState({isLoaded:true})
         let formData = new FormData(e.target)
         formData.append('style', this.state.innerText)
         console.log(formData)

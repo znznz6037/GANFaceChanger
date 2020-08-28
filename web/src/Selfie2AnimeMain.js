@@ -4,6 +4,9 @@ import './index.css';
 import { Spinner, Button, Alert } from 'reactstrap'
 import { BrowserRouter as Redirect, withRouter} from 'react-router-dom'
 import $ from 'jquery'
+import swal from 'sweetalert'
+
+var isLoaded=false
 
 class Selfie2AnimeMain extends Component{
   constructor(props) {
@@ -20,7 +23,7 @@ class Selfie2AnimeMain extends Component{
 
   componentDidMount(){
     $('#upload').submit(function(){
-      if(this.isLoaded){
+      if(isLoaded){
         $('#notLoading').hide()
         $('#loading').show()
       }
@@ -29,6 +32,7 @@ class Selfie2AnimeMain extends Component{
     $('#file_upload').change(function(e){
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
+      if(document.getElementById("image").files.length != 0 ) isLoaded=true
       reader.onload = function(){
           var thumbnail = new Image();
           thumbnail.src = reader.result;
@@ -57,10 +61,9 @@ class Selfie2AnimeMain extends Component{
   uploadImage = (e) => {
     e && e.preventDefault();
     if(document.getElementById("image").files.length == 0 ){
-      alert("이미지를 업로드 해주세요!");
+      swal("Error", "이미지를 업로드해주세요!", "error")
     }
     else{
-      this.setState({isLoaded:true})
       let formData = new FormData(e.target)
     
       console.log(formData)
