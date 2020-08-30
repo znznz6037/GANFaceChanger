@@ -13,8 +13,8 @@ log = logging.basicConfig(filename='testsvr.log', level=logging.INFO)
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 api = Api(app)
-FUPLOAD_DIR="./data/celeba/images"
-AUPLOAD_DIR="./imgs"
+FUPLOAD_DIR="./stargan/data/celeba/images"
+AUPLOAD_DIR="./UGATIT-master/imgs"
 RESULT_DIR="./static/image/results"
 ANIME_RESULT_DIR="./UGATIT-master/result/image.jpg"
 app.config['FUPLOAD_DIR'] = FUPLOAD_DIR
@@ -24,7 +24,7 @@ app.config['ANIME_RESULT_DIR'] = ANIME_RESULT_DIR
 app.config['JSON_AS_ASCII'] = False
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-image = 'static/image/results/1-images.jpg'
+image = './stargan/static/image/results/1-images.jpg'
 animeFname = ''
 
 @app.route('/')
@@ -37,7 +37,6 @@ def upload():
      if request.method == 'POST':
         if os.path.isfile(image):
            os.remove(image)
-        os.chdir('./stargan')
         style = request.form['style']
         print(style)
         f = request.files['file']
@@ -46,32 +45,34 @@ def upload():
         path = os.path.join(app.config['FUPLOAD_DIR'], fname)
         f.save(path)
         print(path)
+        img = Image.open(path)
+        img_resize = img.resize((256, 256), Image.LANCZOS)
+        img_resize.save(path)
+
         if style == '안경':
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "180000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "180000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         elif style == '하얀 피부':
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "199000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Pale_Skin", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "199000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Pale_Skin", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         elif style == '염소 수염': 
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "198000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Goatee", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "198000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Goatee", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         elif style == '화장': 
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "197000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Wearing_Lipstick", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "197000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Wearing_Lipstick", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         elif style == '미소': 
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "196000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Smiling", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "196000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Smiling", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         
         else:
-            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"])
+            subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         data = {}
         with open(image, mode='rb') as file:
            img = file.read()
         data['img'] = base64.b64encode(img).decode('utf8')
-        os.chdir('../')
         return jsonify(data)
 
 @app.route('/uploadAnime', methods=['GET', 'POST'])
 def anime():
-    os.chdir('UGATIT-master')
     if request.method == 'POST':
-        uploadImg = 'imgs/image.jpg'
-        animeImg = 'result/image.jpg'
+        uploadImg = './UGATIT-master/imgs/image.jpg'
+        animeImg = './UGATIT-master/result/image.jpg'
         if os.path.isfile(uploadImg):
             os.remove(uploadImg)
         f = request.files['file']
@@ -80,12 +81,15 @@ def anime():
         path = os.path.join(app.config['AUPLOAD_DIR'], 'image.jpg')
         f.save(path)
         print(path)
-        subprocess.call(['python3', 'test.py'])
+        img = Image.open(uploadImg)
+        img_resize = img.resize((500, 500), Image.LANCZOS)
+        img_resize.save(uploadImg)
+
+        subprocess.call(['python3', 'test.py'], cwd='./UGATIT-master')
         data = {}
         with open(animeImg, mode='rb') as file:
            img = file.read()
         data['img'] = base64.b64encode(img).decode('utf8')
-        os.chdir('../')
         return jsonify(data)
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -98,7 +102,7 @@ def post():
 
 @app.route('/faceDownload', methods=['GET', 'POST'])
 def download():
-    return send_file(image, as_attachment=True)
+    return send_file('./stargan' + image, as_attachment=True)
 
 @app.route('/animeDownload', methods=['GET', 'POST'])
 def animeDownload():
