@@ -59,7 +59,6 @@ def upload():
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "197000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Wearing_Lipstick", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         elif style == '미소': 
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"1", "--test_iters", "196000", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Smiling", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
-        
         else:
             subprocess.call(["python3", "main.py", "--mode", "test", "--dataset", "CelebA", "--image_size", "128", "--c_dim" ,"5", "--filename", fname, "--log_step", "1", "--sample_step", "1", "--lr_update_step", "1", "--selected_attrs","Eyeglasses", "Bald", "Brown_Hair", "Male", "Young", "--model_save_dir=stargan_celeba_128/models", "--result_dir=static/image/results"], cwd='./stargan')
         data = {}
@@ -81,11 +80,11 @@ def anime():
         path = os.path.join(app.config['AUPLOAD_DIR'], 'image.jpg')
         f.save(path)
         print(path)
-        img = Image.open(uploadImg)
-        img_resize = img.resize((500, 500), Image.LANCZOS)
-        img_resize.save(uploadImg)
+        proc = subprocess.call(['python3', 'test.py'], cwd='./UGATIT-master')
+        if proc != 0:
+            print('error')
+            return jsonify('error')
 
-        subprocess.call(['python3', 'test.py'], cwd='./UGATIT-master')
         data = {}
         with open(animeImg, mode='rb') as file:
            img = file.read()
@@ -96,6 +95,14 @@ def anime():
 def post():
     data = {}
     with open(image, mode='rb') as file:
+        img = file.read()
+    data['img'] = base64.b64encode(img).decode('utf8')
+    return jsonify(data)
+
+@app.route('/animeResult', methods=['GET', 'POST'])
+def animePost():
+    data = {}
+    with open(ANIME_RESULT_DIR, mode='rb') as file:
         img = file.read()
     data['img'] = base64.b64encode(img).decode('utf8')
     return jsonify(data)
