@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import "./styles.css";
 import './index.css';
 import { Spinner, Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
-import { BrowserRouter as Redirect, withRouter} from 'react-router-dom'
 import $ from 'jquery'
 import swal from 'sweetalert'
+import createHashHistory from './HashHistory'
 
 var isLoaded=false
 
@@ -13,11 +13,10 @@ class FaceChangeMain extends Component{
     super(props);
 
     this.state = {
-      //isLoaded: false,
       dropdownOpen: false,
       innerText: '스타일 선택',
       image: null,
-      redirect:false
+      imgData: null
     };
 
     this.toggle = this.toggle.bind(this);
@@ -36,7 +35,7 @@ class FaceChangeMain extends Component{
     $('#file_upload').change(function(e){
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
-      if(document.getElementById("image").files.length != 0 ) isLoaded=true
+      if(document.getElementById("image").files.length !== 0 ) isLoaded=true
       reader.onload = function(){
           var thumbnail = new Image();
           thumbnail.src = reader.result;
@@ -58,7 +57,7 @@ class FaceChangeMain extends Component{
 
   uploadImage = (e) => {
       e && e.preventDefault();
-      if(document.getElementById("image").files.length == 0 ){
+      if(document.getElementById("image").files.length === 0 ){
         swal("Error", "이미지를 업로드해주세요!", "error")
       }
       else{
@@ -76,9 +75,7 @@ class FaceChangeMain extends Component{
             success:function(data){
                 console.log("success");
                 console.log(data);
-                this.setState({redirect:true})
-                this.setState({image:data['img']})
-                this.props.history.push('/faceResult', {data})
+                createHashHistory.push('/faceResult')
             }.bind(this),
             error: function(data){
                 console.log("error");
@@ -86,6 +83,10 @@ class FaceChangeMain extends Component{
             }
         });
       }
+  }
+
+  getData(){
+    return this.state.imgData
   }
 
   toggle() {
@@ -135,7 +136,7 @@ class FaceChangeMain extends Component{
                             </DropdownToggle>
                             <DropdownMenu>
                               <DropdownItem onClick={this.handleChange} name="하얀 피부">하얀 피부</DropdownItem>
-                              <DropdownItem onClick={this.handleChange} name="염소 수염">염소 수염</DropdownItem>
+                              <DropdownItem onClick={this.handleChange} name="수염">수염</DropdownItem>
                               <DropdownItem onClick={this.handleChange} name="안경">안경</DropdownItem>
                               <DropdownItem onClick={this.handleChange} name="미소">미소</DropdownItem>
                               <DropdownItem onClick={this.handleChange} name="화장">화장</DropdownItem>
@@ -152,4 +153,4 @@ class FaceChangeMain extends Component{
   
 }
 
-export default withRouter(FaceChangeMain);
+export default FaceChangeMain;

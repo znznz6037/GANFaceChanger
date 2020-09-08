@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import "./styles.css";
 import './index.css';
-import { Spinner, Button, Alert } from 'reactstrap'
-import { BrowserRouter as Redirect, withRouter} from 'react-router-dom'
+import { Spinner, Button } from 'reactstrap'
 import $ from 'jquery'
 import swal from 'sweetalert'
+import createHashHistory from './HashHistory'
 
 var isLoaded=false
 
@@ -13,8 +13,7 @@ class Selfie2AnimeMain extends Component{
     super(props);
     this.state = {
       isLoaded: false,
-      image: null,
-      redirect:false
+      image: null
     };
 
     this.toggle = this.toggle.bind(this);
@@ -32,7 +31,7 @@ class Selfie2AnimeMain extends Component{
     $('#file_upload').change(function(e){
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
-      if(document.getElementById("image").files.length != 0 ) isLoaded=true
+      if(document.getElementById("image").files.length !== 0 ) isLoaded=true
       reader.onload = function(){
           var thumbnail = new Image();
           thumbnail.src = reader.result;
@@ -60,7 +59,7 @@ class Selfie2AnimeMain extends Component{
 
   uploadImage = (e) => {
     e && e.preventDefault();
-    if(document.getElementById("image").files.length == 0 ){
+    if(document.getElementById("image").files.length === 0 ){
       swal("Error", "이미지를 업로드해주세요!", "error")
     }
     else{
@@ -76,16 +75,17 @@ class Selfie2AnimeMain extends Component{
           contentType: false,
           processData: false,
           success:function(data){
-              console.log("success");
-              console.log(data);
-              this.setState({redirect:true})
-              this.setState({image:data['img']})
-              this.props.history.push('/animeResult', {data})
-          }.bind(this),
-          error: function(data){
-              console.log("error");
-              console.log(data);
-          }
+              if(data === 'error'){
+                swal("Error", "얼굴 인식에 실패하였습니다.\n다른 이미지를 업로드해 주세요.", "error")
+                $('#notLoading').show()
+                $('#loading').hide()
+              }
+              else{
+                console.log("success");
+                console.log(data);
+                createHashHistory.push('/animeResult')
+              }
+          }.bind(this)
       });
     }
 }
@@ -105,7 +105,7 @@ class Selfie2AnimeMain extends Component{
                 <Spinner type="grow" color="info" />
                 <Spinner type="grow" color="dark" />
               </div>
-              <p id="ptext">딥러닝 작업이 수행되고 있습니다. 20초 정도만 기다려주세요.</p>
+              <p id="ptext">딥러닝 작업이 수행되고 있습니다.<br/> 20초 정도만 기다려주세요.</p>
             </div>
             <div id="notLoading">
                 <form id="upload" onSubmit={this.uploadImage.bind(this)} action="https://psbgrad.duckdns.org:5000/uploadAnime" method="POST" encType="multipart/form-data">
@@ -127,4 +127,4 @@ class Selfie2AnimeMain extends Component{
   }
 }
 
-export default withRouter(Selfie2AnimeMain);
+export default Selfie2AnimeMain;

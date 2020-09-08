@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap'
+import $ from 'jquery'
 
 class Selfie2AnimeResult extends Component{
   constructor(props) {
-    super(props);
-    console.log('result')
-    console.log(this.props.location.state.data)
+    super(props)
+    this.state = {
+      imgData : null
+    }
   }
 
-  base64ToImage(){
-    var base64_string=this.props.location.state.data
-    var img = document.createElement("img")
-    img.src = "data:image/jpg;base64" + base64_string
-    return <img src='"data:image/jpg;base64" + base64_string'></img> 
+  componentDidMount(){
+    $.ajax({
+      type:'GET',
+      url: 'https://psbgrad.duckdns.org:5000/animeResult',
+      success:function(data){
+          console.log("success");
+          console.log(data);
+          this.setState({imgData:data['img']})
+      }.bind(this),
+      error: function(data){
+          console.log("error");
+          console.log(data);
+      }
+    });
   }
 
   render() {
@@ -23,7 +34,7 @@ class Selfie2AnimeResult extends Component{
             <div id="border_title">
               <h1 id="title">결과</h1>
             </div>
-            <img src={'data:image/jpg;base64,' + this.props.location.state.data["img"]}/>
+            <img src={'data:image/jpg;base64,' + this.state.imgData}/>
             <div>
               <form action="https://psbgrad.duckdns.org:5000/animeDownload" method="POST" encType="multipart/form-data">
                 <Button id="submit" color="warning" type="submit" size="lg">이미지 다운로드하기</Button>

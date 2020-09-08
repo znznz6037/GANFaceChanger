@@ -1,7 +1,7 @@
 import React from 'react';
 import InfoModal from './Modal';
 import { push as Menu } from 'react-burger-menu'
-import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
+import { HashRouter as Router, Route, Link, Switch} from 'react-router-dom';
 import Selfie2Anime from './Selfie2Anime'
 import FaceChange from './FaceChange'
 import faceResult from './FaceResult'
@@ -59,7 +59,7 @@ class Slide extends React.Component {
         </Menu>
             <Switch>
                 <Route exact path="/" component={FaceChange}/>
-                <Route path="/selfie2anime" component={Selfie2Anime}/>
+                <Route path="/Selfie2Anime" component={Selfie2Anime}/>
                 <Route path="/faceResult" component={faceResult}/>
                 <Route path="/animeResult" component={Selfie2AnimeResult}/>
             </Switch>
