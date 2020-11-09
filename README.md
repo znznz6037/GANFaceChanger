@@ -3,7 +3,8 @@
   
 Face Change Web Application using [StarGAN](https://arxiv.org/abs/1711.09020) and [U-GAT-IT](https://openreview.net/forum?id=BJlZ5ySKPH)
 ## [Web Page](https://znznz6037.github.io/GANFaceChanger/#/)
-This web site created using [Create-React-App](https://github.com/facebook/create-react-app).
+This web site created using [Create-React-App](https://github.com/facebook/create-react-app).  
+서버 만료되었습니다.
 
 ## [Android Application](https://github.com/znznz6037/GANFaceChanger_Android)  
 Developed using Kotlin
